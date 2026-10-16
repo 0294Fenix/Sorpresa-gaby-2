@@ -16,9 +16,13 @@
   --panel: rgba(24, 15, 40, .93);
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
@@ -32,17 +36,25 @@ body {
   overflow-x: hidden;
 }
 
-button, input { font: inherit; }
-button { -webkit-tap-highlight-color: transparent; cursor: pointer; }
+button, input {
+  font: inherit;
+}
 
-#lights, #stage-lights {
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+#lights,
+#stage-lights {
   position: fixed;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
 }
 
-#lights { z-index: 0; }
+#lights {
+  z-index: 0;
+}
 
 #stage-lights {
   z-index: 0;
@@ -50,7 +62,9 @@ button { -webkit-tap-highlight-color: transparent; cursor: pointer; }
   transition: opacity 1s;
 }
 
-body.concert-mode #stage-lights { opacity: 1; }
+body.concert-mode #stage-lights {
+  opacity: 1;
+}
 
 .light {
   position: absolute;
@@ -78,7 +92,10 @@ body.concert-mode #stage-lights { opacity: 1; }
   animation: sweep 3s ease-in-out infinite alternate;
 }
 
-.stage-light.one { left: 12%; background: #ff287f; }
+.stage-light.one {
+  left: 12%;
+  background: #ff287f;
+}
 
 .stage-light.two {
   right: 12%;
@@ -102,7 +119,9 @@ header, main, footer {
   z-index: 1;
 }
 
-header { padding: 18px 12px 0; }
+header {
+  padding: 18px 12px 0;
+}
 
 .brand {
   display: inline-block;
@@ -168,7 +187,9 @@ main {
   text-transform: uppercase;
 }
 
-.screen { display: none; }
+.screen {
+  display: none;
+}
 
 .screen.active {
   display: block;
@@ -205,14 +226,18 @@ h2 {
   line-height: 1.15;
 }
 
-p { line-height: 1.65; }
+p {
+  line-height: 1.65;
+}
 
 .neon {
   color: var(--pink);
   text-shadow: 0 0 15px #ff287f80;
 }
 
-.muted { color: #c6bad8; }
+.muted {
+  color: #c6bad8;
+}
 
 .icon {
   font-size: 62px;
@@ -232,11 +257,16 @@ p { line-height: 1.65; }
   text-transform: uppercase;
   background: linear-gradient(100deg, #f32478, #853bff);
   box-shadow: 0 7px 25px #a52cff40;
-  transition: transform .2s, opacity .2s;
+  transition: transform .2s;
 }
 
-.primary:active { transform: scale(.97); }
-.primary:disabled { opacity: .5; cursor: not-allowed; }
+.primary:active {
+  transform: scale(.97);
+}
+
+.primary:disabled {
+  opacity: .5;
+}
 
 .secondary {
   padding: 12px 16px;
@@ -247,25 +277,18 @@ p { line-height: 1.65; }
   color: white;
 }
 
-/* JUEGO DE LAS CAJAS */
-
 .boxes {
   display: flex;
   justify-content: center;
-  align-items: stretch;
   gap: 9px;
   margin: 28px 0 15px;
-  min-height: 120px;
-  position: relative;
-  isolation: isolate;
+  min-height: 115px;
 }
 
 .mystery-box {
-  position: relative;
-  flex: 1 1 0;
+  flex: 1;
   min-width: 0;
   max-width: 170px;
-  min-height: 115px;
   padding: 17px 3px;
   border: 1px solid #ffffff30;
   border-radius: 15px;
@@ -273,13 +296,10 @@ p { line-height: 1.65; }
   background: linear-gradient(145deg, #48235d, #171020);
   box-shadow: 0 7px 18px #0005;
   font-size: 35px;
-  transform: translate3d(0, 0, 0);
-  will-change: transform;
   transition:
-    border-color .25s,
-    box-shadow .25s,
-    background .25s,
-    filter .25s;
+    transform .48s cubic-bezier(.2,.8,.3,1),
+    border-color .2s,
+    box-shadow .2s;
 }
 
 .mystery-box span {
@@ -289,67 +309,18 @@ p { line-height: 1.65; }
   letter-spacing: 1px;
 }
 
-.mystery-box:disabled { cursor: default; }
-
-.mystery-box:not(:disabled):active {
-  filter: brightness(1.4);
+.mystery-box:disabled {
+  cursor: default;
 }
 
-.mystery-box.box-glow {
-  border-color: var(--blue);
-  box-shadow:
-    0 0 12px #43dcff80,
-    0 0 28px #a34dff70,
-    inset 0 0 14px #43dcff20;
-  animation: boxGlow 1s ease-in-out infinite alternate;
+#shuffle-status {
+  padding: 14px;
+  margin: 20px 0 10px;
 }
 
-@keyframes boxGlow {
-  from {
-    filter: brightness(1);
-    box-shadow: 0 0 8px #43dcff60;
-  }
-  to {
-    filter: brightness(1.25);
-    box-shadow:
-      0 0 18px #43dcffb0,
-      0 0 32px #a34dff90,
-      inset 0 0 15px #ffffff20;
-  }
+#star-preview {
+  font-size: 45px;
 }
-
-.mystery-box.box-winner {
-  border-color: var(--gold) !important;
-  background: linear-gradient(145deg, #775126, #332018);
-  box-shadow:
-    0 0 18px #ffe08a,
-    0 0 42px #ffe08a90,
-    inset 0 0 20px #ffe08a30;
-  animation: winnerPulse .7s ease-in-out infinite alternate;
-}
-
-@keyframes winnerPulse {
-  from { transform: scale(1); filter: brightness(1); }
-  to { transform: scale(1.06); filter: brightness(1.4); }
-}
-
-.mystery-box.box-wrong {
-  border-color: var(--pink) !important;
-  background: linear-gradient(145deg, #612039, #21101b);
-  box-shadow: 0 0 20px #ff287f90;
-  animation: wrongBox .35s ease;
-}
-
-@keyframes wrongBox {
-  20% { transform: translateX(-5px); }
-  40% { transform: translateX(5px); }
-  60% { transform: translateX(-4px); }
-  80% { transform: translateX(4px); }
-  100% { transform: translateX(0); }
-}
-
-#shuffle-status { padding: 14px; margin: 20px 0 10px; }
-#star-preview { font-size: 45px; }
 
 #box-result,
 #shuffle-message,
@@ -396,8 +367,13 @@ input:focus {
   transition: .2s;
 }
 
-.answer:active { transform: scale(.98); }
-.answer:disabled { opacity: .8; }
+.answer:active {
+  transform: scale(.98);
+}
+
+.answer:disabled {
+  opacity: .8;
+}
 
 .count-number {
   font-size: clamp(100px, 30vw, 180px);
@@ -433,14 +409,25 @@ input:focus {
   animation: ticketLights 4s linear infinite;
 }
 
-@keyframes ticketLights {
-  to { background-position: 200% 0; }
+.ticket-top small {
+  color: #ffbee0;
+  letter-spacing: 4px;
 }
 
-.ticket-top small { color: #ffbee0; letter-spacing: 4px; }
-.ticket-top h3 { margin: 10px 0; font-size: 28px; }
-.ticket-body { padding: 19px; }
-.ticket-title { margin-top: 0; font-size: 22px; font-weight: 900; }
+.ticket-top h3 {
+  margin: 10px 0;
+  font-size: 28px;
+}
+
+.ticket-body {
+  padding: 19px;
+}
+
+.ticket-title {
+  margin-top: 0;
+  font-size: 22px;
+  font-weight: 900;
+}
 
 .ticket-info {
   display: grid;
@@ -512,9 +499,20 @@ input:focus {
 }
 
 @keyframes concertEntrance {
-  0% { opacity: 0; transform: scale(.88); filter: brightness(2); }
-  65% { opacity: 1; transform: scale(1.02); }
-  100% { opacity: 1; transform: scale(1); filter: brightness(1); }
+  0% {
+    opacity: 0;
+    transform: scale(.88);
+    filter: brightness(2);
+  }
+  65% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: brightness(1);
+  }
 }
 
 #reveal-screen.active .ticket {
@@ -542,7 +540,9 @@ input:focus {
   }
 }
 
-.shake { animation: shake .3s; }
+.shake {
+  animation: shake .3s;
+}
 
 @keyframes shake {
   25% { transform: translateX(-5px); }
@@ -556,14 +556,14 @@ footer {
   font-size: 11px;
 }
 
-[hidden] { display: none !important; }
+[hidden] {
+  display: none !important;
+}
 
 @media (max-width: 380px) {
   .panel { padding: 20px 12px; }
   .mystery-box { font-size: 29px; }
-  .mystery-box span { font-size: 9px; }
   .ticket-info strong { font-size: 12px; }
-  .boxes { gap: 6px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -595,7 +595,9 @@ footer {
 
   <div class="musicbar">
     <span>🎧 MODO CONCIERTO</span>
-    <button id="music-toggle" type="button">▶ ACTIVAR MÚSICA</button>
+    <button id="music-toggle" type="button">
+      ▶ ACTIVAR MÚSICA
+    </button>
   </div>
 
   <audio id="bg-music" loop preload="none">
@@ -620,6 +622,7 @@ footer {
 
   <section class="screen active" id="welcome">
     <div class="panel">
+
       <div class="icon">🌌</div>
 
       <p class="neon" style="letter-spacing:4px;font-weight:bold">
@@ -640,7 +643,9 @@ footer {
         capaz de superar todos los retos.
       </p>
 
-      <p>¿Estás lista para descubrir tu sorpresa?</p>
+      <p>
+        ¿Estás lista para descubrir tu sorpresa?
+      </p>
 
       <div class="icon">🎤 ✨ 🎶</div>
 
@@ -651,6 +656,7 @@ footer {
       <p class="muted" style="font-size:11px">
         Una aventura creada especialmente para ti ❤️
       </p>
+
     </div>
   </section>
 
@@ -668,82 +674,81 @@ footer {
       <h2>ENCUENTRA LA <span class="neon">ESTRELLA</span></h2>
 
       <p class="muted">
-        Una estrella mágica está escondida en una de estas tres cajas.
+        Una estrella mágica está escondida en una de
+        estas tres cajas.
       </p>
 
-      <div id="accept-challenge">
-        <div class="panel">
-          <div class="icon">💜</div>
-          <h3>AGENTE GABY</h3>
+      <p>
+        ¡Observa dónde está y sigue su movimiento!
+      </p>
 
-          <p>
-            Tu primera misión consiste en encontrar la estrella mágica.
-            Observa con atención, porque las cajas se moverán rápidamente.
-          </p>
-
-          <p class="muted">
-            ¿Tienes la concentración necesaria para superar el desafío?
-          </p>
-
-          <button class="primary" type="button"
-                  onclick="acceptBoxChallenge()">
-            💜 ¡ACEPTO EL RETO!
-          </button>
-        </div>
+      <div id="shuffle-status" class="panel">
+        <div id="star-preview">⭐</div>
+        <p id="shuffle-message">
+          Pulsa el botón para comenzar el desafío.
+        </p>
       </div>
 
-      <div id="game-area" hidden>
+      <div class="boxes" id="boxes">
 
-        <p>¡Observa dónde está y sigue su movimiento!</p>
+        <button class="mystery-box" data-box="0" disabled>
+          🎁<span>CAJA 01</span>
+        </button>
 
-        <div id="shuffle-status" class="panel">
-          <div id="star-preview">⭐</div>
-          <p id="shuffle-message">
-            Presiona el botón para comenzar el desafío.
-          </p>
-        </div>
+        <button class="mystery-box" data-box="1" disabled>
+          🎁<span>CAJA 02</span>
+        </button>
 
-        <div class="boxes" id="boxes"></div>
+        <button class="mystery-box" data-box="2" disabled>
+          🎁<span>CAJA 03</span>
+        </button>
 
-        <p id="box-result" aria-live="polite">
-          ¡Presta mucha atención!
+      </div>
+
+      <p id="box-result" aria-live="polite">
+        ¡Presta mucha atención!
+      </p>
+
+      <button class="primary" id="start-shuffle"
+              onclick="startBoxGame()">
+        ✨ INICIAR DESAFÍO
+      </button>
+
+      <button id="retry-box" class="secondary"
+              onclick="startBoxGame()" hidden>
+        🔄 VOLVER A INTENTAR
+      </button>
+
+      <div id="box-success" hidden>
+
+        <div class="icon">🏆</div>
+
+        <h2 class="neon">¡LO LOGRASTE, GABY!</h2>
+
+        <p>
+          ¡Has encontrado la estrella ganadora!
+          Pero tu siguiente pista no está aquí.
         </p>
 
-        <button class="primary" id="start-shuffle"
-                onclick="startBoxGame()">
-          ✨ INICIAR DESAFÍO
-        </button>
+        <div class="panel">
+          <div class="icon">🎒</div>
 
-        <button id="retry-box" class="secondary"
-                onclick="startBoxGame()" hidden>
-          🔄 VOLVER A INTENTAR
-        </button>
+          <h3>¡VE A LA MOCHILA DE PAPÁ!</h3>
 
-        <div id="box-success" hidden>
-          <div class="icon">🏆</div>
-          <h2 class="neon">¡LO LOGRASTE, GABY!</h2>
-
-          <p>
-            ¡Has encontrado la estrella ganadora!
-            Pero tu siguiente pista no está aquí.
+          <p class="muted">
+            Busca el código secreto que está escondido
+            allí. Lo necesitarás para desbloquear
+            el siguiente nivel.
           </p>
-
-          <div class="panel">
-            <div class="icon">🎒</div>
-            <h3>¡VE A LA MOCHILA DE PAPÁ!</h3>
-
-            <p class="muted">
-              Busca el código secreto que está escondido allí.
-              Lo necesitarás para desbloquear el siguiente nivel.
-            </p>
-          </div>
-
-          <button class="primary" onclick="goToCodeScreen()">
-            YA TENGO EL CÓDIGO 🔐
-          </button>
         </div>
 
+        <button class="primary"
+                onclick="showScreen('code-screen',2)">
+          YA TENGO EL CÓDIGO 🔐
+        </button>
+
       </div>
+
     </div>
   </section>
 
@@ -753,6 +758,7 @@ footer {
     <div class="panel">
 
       <div class="icon">🔐</div>
+
       <h2>ACCESO <span class="neon">RESTRINGIDO</span></h2>
 
       <p>
@@ -761,6 +767,7 @@ footer {
       </p>
 
       <form id="code-form">
+
         <input
           id="secret-code"
           type="text"
@@ -774,6 +781,7 @@ footer {
         <button class="primary" type="submit">
           DESBLOQUEAR NIVEL 🔓
         </button>
+
       </form>
 
       <p id="code-feedback" aria-live="polite"></p>
@@ -785,7 +793,7 @@ footer {
     </div>
   </section>
 
-  <!-- 4. PREGUNTA FINAL -->
+  <!-- 4. PREGUNTA -->
 
   <section class="screen" id="quiz-screen">
     <div class="panel">
@@ -814,7 +822,8 @@ footer {
         </button>
 
         <button class="answer" onclick="answerQuestion(2)">
-          🎤 C) ¡La función de cine de Stray Kids en Cinépolis!
+          🎤 C) ¡La función de cine de Stray Kids
+          en Cinépolis!
         </button>
 
       </div>
@@ -830,11 +839,16 @@ footer {
     <div class="panel">
 
       <div class="icon">🏆</div>
+
       <h2>¡MISIÓN COMPLETADA!</h2>
 
-      <p>Has desbloqueado tu sorpresa, Gaby.</p>
+      <p>
+        Has desbloqueado tu sorpresa, Gaby.
+      </p>
 
-      <p class="neon">¡PREPÁRATE PARA DESCUBRIRLA!</p>
+      <p class="neon">
+        ¡PREPÁRATE PARA DESCUBRIRLA!
+      </p>
 
       <div id="count-number" class="count-number">3</div>
 
@@ -866,6 +880,8 @@ footer {
         con papá! ❤️
       </p>
 
+      <!-- BOLETO 1 -->
+
       <div class="ticket">
 
         <div class="ticket-top">
@@ -876,10 +892,13 @@ footer {
 
         <div class="ticket-body">
 
-          <p class="ticket-title">🎟️ BOLETO ESPECIAL DE GABY</p>
+          <p class="ticket-title">
+            🎟️ BOLETO ESPECIAL DE GABY
+          </p>
 
           <p>
-            Una invitación para compartir un día inolvidable.
+            Una invitación para compartir un día
+            inolvidable.
           </p>
 
           <div class="ticket-info">
@@ -920,6 +939,8 @@ footer {
 
       </div>
 
+      <!-- BOLETO 2 -->
+
       <div class="ticket">
 
         <div class="ticket-top">
@@ -930,7 +951,9 @@ footer {
 
         <div class="ticket-body">
 
-          <p class="ticket-title">🎟️ SEGUNDO BOLETO</p>
+          <p class="ticket-title">
+            🎟️ SEGUNDO BOLETO
+          </p>
 
           <p>
             Porque las mejores aventuras se disfrutan juntos.
@@ -974,9 +997,12 @@ footer {
 
       </div>
 
+      <!-- MENSAJE DE PAPÁ -->
+
       <div class="panel">
 
         <div class="icon">💌</div>
+
         <h2>UN MENSAJE DE <span class="neon">PAPÁ</span></h2>
 
         <p>Mi querida Gaby:</p>
@@ -988,9 +1014,10 @@ footer {
         </p>
 
         <p>
-          Quiero que nos la pasemos increíble, que cantemos,
-          que disfrutemos cada momento y que guardemos este día
-          como un recuerdo muy bonito de los dos.
+          Quiero que nos la pasemos increíble, que
+          cantemos, que disfrutemos cada momento y
+          que guardemos este día como un recuerdo
+          muy bonito de los dos.
         </p>
 
         <p>
@@ -999,7 +1026,9 @@ footer {
           es compartir esta experiencia contigo.
         </p>
 
-        <h2 class="neon">¡TE QUIERO MUCHÍSIMO, GABY! ❤️</h2>
+        <h2 class="neon">
+          ¡TE QUIERO MUCHÍSIMO, GABY! ❤️
+        </h2>
 
         <p>Con todo mi amor,</p>
 
@@ -1032,8 +1061,13 @@ footer {
    CONFIGURACIÓN
    ========================================== */
 
+// Cambia este código por el que esconderás
+// físicamente en la mochila.
 const SECRET_CODE = "SKZ2026";
+
+// Segundos desde los que empieza la canción.
 const MUSIC_START_SECONDS = 0;
+
 
 /* ==========================================
    LUCES DE FONDO
@@ -1048,15 +1082,22 @@ for (let i = 0; i < 65; i++) {
   light.style.left = Math.random() * 100 + "%";
   light.style.top = Math.random() * 100 + "%";
   light.style.animationDelay = Math.random() * 3 + "s";
-  light.style.animationDuration = (1 + Math.random() * 3) + "s";
+  light.style.animationDuration =
+    (1 + Math.random() * 3) + "s";
 
-  const glowColors = ["#43dcff", "#ff287f", "#a34dff"];
+  const glowColors = [
+    "#43dcff",
+    "#ff287f",
+    "#a34dff"
+  ];
 
-  light.style.boxShadow =
-    "0 0 12px 3px " + glowColors[i % glowColors.length];
+  const glow = glowColors[i % glowColors.length];
+
+  light.style.boxShadow = "0 0 12px 3px " + glow;
 
   lights.appendChild(light);
 }
+
 
 /* ==========================================
    AUDIO
@@ -1096,6 +1137,7 @@ function playWrongSound() {
   wrongSound.play().catch(() => {});
 }
 
+
 /* ==========================================
    NAVEGACIÓN
    ========================================== */
@@ -1129,7 +1171,7 @@ function showScreen(id, stage) {
     (stage / 5 * 100) + "%";
 
   document.getElementById("stage-label").textContent =
-    stageLabels[stage] || stageLabels[0];
+    stageLabels[stage];
 
   window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -1139,41 +1181,19 @@ function showScreen(id, stage) {
 }
 
 function startMission() {
-  resetBoxChallenge();
   showScreen("boxes-screen", 1);
 }
 
-/* ==========================================
-   ACEPTAR EL RETO
-   ========================================== */
-
-function acceptBoxChallenge() {
-  document.getElementById("accept-challenge").hidden = true;
-  document.getElementById("game-area").hidden = false;
-
-  document.getElementById("shuffle-status").hidden = false;
-  document.getElementById("boxes").hidden = false;
-
-  document.getElementById("start-shuffle").hidden = false;
-  document.getElementById("start-shuffle").disabled = false;
-
-  document.getElementById("retry-box").hidden = true;
-  document.getElementById("box-success").hidden = true;
-
-  document.getElementById("star-preview").textContent = "⭐";
-
-  document.getElementById("shuffle-message").textContent =
-    "¡Reto aceptado! Presiona INICIAR DESAFÍO para comenzar.";
-
-  document.getElementById("box-result").textContent =
-    "¡Mucha suerte, agente Gaby! ⭐";
-
-  resetBoxPositions();
-}
 
 /* ==========================================
-   JUEGO ANIMADO DE LAS CAJAS
+   CAJAS MISTERIOSAS
    ========================================== */
+
+let winningBox = 0;
+let boxFinished = false;
+let boxGameStarted = false;
+let boxPositions = [0, 1, 2];
+let shuffleTimer = null;
 
 const boxContainer = document.getElementById("boxes");
 const boxMessage = document.getElementById("shuffle-message");
@@ -1182,354 +1202,184 @@ const starPreview = document.getElementById("star-preview");
 const startShuffleButton = document.getElementById("start-shuffle");
 const retryBoxButton = document.getElementById("retry-box");
 
-let winningBox = 0;
-let boxFinished = false;
-let boxGameStarted = false;
-let isShuffling = false;
-let shuffleTimer = null;
-let shuffleRunId = 0;
-
-/*
-  Cada caja conserva su identidad:
-  0, 1 o 2.
-
-  Cuando se intercambian, se mueven físicamente en pantalla
-  y después cambian de lugar dentro del contenedor.
-*/
-
-function createBox(originalPosition) {
-  const button = document.createElement("button");
-
-  button.type = "button";
-  button.className = "mystery-box";
-  button.dataset.box = originalPosition;
-
-  button.innerHTML =
-    "🎁<span>CAJA 0" + (originalPosition + 1) + "</span>";
-
-  button.disabled = true;
-
-  button.addEventListener("click", () => {
-    chooseBox(Number(button.dataset.box));
-  });
-
-  return button;
-}
-
-function resetBoxPositions() {
-  clearTimeout(shuffleTimer);
-
-  shuffleRunId++;
-
-  boxFinished = false;
-  boxGameStarted = false;
-  isShuffling = false;
-
+function renderBoxes() {
   boxContainer.innerHTML = "";
 
-  for (let i = 0; i < 3; i++) {
-    boxContainer.appendChild(createBox(i));
-  }
+  boxPositions.forEach((originalPosition, visualPosition) => {
+    const button = document.createElement("button");
 
-  document.getElementById("box-success").hidden = true;
-  retryBoxButton.hidden = true;
+    button.className = "mystery-box";
+    button.dataset.box = originalPosition;
 
-  startShuffleButton.hidden = false;
-  startShuffleButton.disabled = false;
+    button.innerHTML =
+      "🎁<span>CAJA 0" + (visualPosition + 1) + "</span>";
 
-  boxMessage.textContent =
-    "¡Reto aceptado! Presiona INICIAR DESAFÍO para comenzar.";
+    button.disabled = true;
 
-  boxResult.textContent = "¡Mucha suerte, agente Gaby! ⭐";
-  starPreview.textContent = "⭐";
-}
+    button.addEventListener("click", () => {
+      chooseBox(originalPosition);
+    });
 
-function resetBoxChallenge() {
-  clearTimeout(shuffleTimer);
-
-  shuffleRunId++;
-
-  boxFinished = false;
-  boxGameStarted = false;
-  isShuffling = false;
-
-  document.getElementById("accept-challenge").hidden = false;
-  document.getElementById("game-area").hidden = true;
-  document.getElementById("box-success").hidden = true;
-  document.getElementById("retry-box").hidden = true;
-
-  document.getElementById("start-shuffle").hidden = false;
-  document.getElementById("start-shuffle").disabled = false;
-
-  document.getElementById("shuffle-message").textContent =
-    "¿Estás lista para encontrar la estrella?";
-
-  document.getElementById("box-result").textContent =
-    "Primero debes aceptar el reto, agente Gaby.";
-
-  boxContainer.innerHTML = "";
-
-  for (let i = 0; i < 3; i++) {
-    boxContainer.appendChild(createBox(i));
-  }
-}
-
-/*
-  Intercambia dos cajas con movimiento real.
-
-  Primero calcula sus posiciones actuales.
-  Luego anima cada caja hacia la posición de la otra.
-  Finalmente reorganiza los elementos del HTML.
-
-  La identidad de cada caja permanece en data-box,
-  por lo que la estrella nunca cambia de caja por error.
-*/
-
-async function animateSwap(firstIndex, secondIndex, runId) {
-  if (runId !== shuffleRunId) return false;
-
-  const buttons = [...boxContainer.querySelectorAll(".mystery-box")];
-
-  const firstBox = buttons[firstIndex];
-  const secondBox = buttons[secondIndex];
-
-  if (!firstBox || !secondBox) return false;
-
-  const firstRect = firstBox.getBoundingClientRect();
-  const secondRect = secondBox.getBoundingClientRect();
-
-  const distanceX = secondRect.left - firstRect.left;
-
-  firstBox.classList.add("box-glow");
-  secondBox.classList.add("box-glow");
-
-  const animationOptions = {
-    duration: 480,
-    easing: "cubic-bezier(.22,.8,.25,1)",
-    fill: "forwards"
-  };
-
-  const firstAnimation = firstBox.animate(
-    [
-      { transform: "translate3d(0,0,0) scale(1)" },
-      {
-        transform:
-          "translate3d(" + distanceX + "px,-12px,0) scale(1.08)"
-      }
-    ],
-    animationOptions
-  );
-
-  const secondAnimation = secondBox.animate(
-    [
-      { transform: "translate3d(0,0,0) scale(1)" },
-      {
-        transform:
-          "translate3d(" + (-distanceX) + "px,12px,0) scale(1.08)"
-      }
-    ],
-    animationOptions
-  );
-
-  await Promise.all([
-    firstAnimation.finished.catch(() => {}),
-    secondAnimation.finished.catch(() => {})
-  ]);
-
-  if (runId !== shuffleRunId) {
-    firstAnimation.cancel();
-    secondAnimation.cancel();
-    return false;
-  }
-
-  /*
-    Reordenar los elementos intercambia sus lugares reales.
-    Los data-box no cambian: cada caja sigue siendo la misma.
-  */
-
-  const currentBoxes = [...boxContainer.children];
-
-  const temp = currentBoxes[firstIndex];
-  currentBoxes[firstIndex] = currentBoxes[secondIndex];
-  currentBoxes[secondIndex] = temp;
-
-  currentBoxes.forEach(box => {
-    boxContainer.appendChild(box);
-  });
-
-  firstAnimation.cancel();
-  secondAnimation.cancel();
-
-  [...boxContainer.querySelectorAll(".mystery-box")].forEach(
-    (box, visualIndex) => {
-      box.classList.remove("box-glow");
-      box.style.transform = "";
-
-      const label = box.querySelector("span");
-
-      if (label && !box.classList.contains("box-winner")) {
-        label.textContent =
-          "CAJA 0" + (visualIndex + 1);
-      }
-    }
-  );
-
-  return true;
-}
-
-function delay(ms) {
-  return new Promise(resolve => {
-    shuffleTimer = setTimeout(resolve, ms);
+    boxContainer.appendChild(button);
   });
 }
 
-async function startBoxGame() {
-  if (isShuffling) return;
-
+function startBoxGame() {
   clearTimeout(shuffleTimer);
-
-  shuffleRunId++;
-  const thisRun = shuffleRunId;
 
   boxFinished = false;
   boxGameStarted = false;
-  isShuffling = true;
 
   document.getElementById("box-success").hidden = true;
 
   retryBoxButton.hidden = true;
-  startShuffleButton.hidden = false;
   startShuffleButton.disabled = true;
+  startShuffleButton.hidden = false;
 
-  resetBoxPositions();
-
-  /*
-    Elegimos una caja ganadora al azar.
-    Su identidad se conserva aunque cambie de lugar.
-  */
+  boxPositions = [0, 1, 2];
 
   winningBox = Math.floor(Math.random() * 3);
 
-  const initialBoxes = [...boxContainer.querySelectorAll(".mystery-box")];
-  const winningButton = initialBoxes.find(
-    box => Number(box.dataset.box) === winningBox
-  );
+  renderBoxes();
 
-  winningButton.innerHTML = "⭐<span>¡AQUÍ ESTÁ!</span>";
-  winningButton.style.borderColor = "#ffe08a";
-  winningButton.style.boxShadow =
-    "0 0 30px #ffe08a70, inset 0 0 15px #ffe08a20";
+  const initialButtons =
+    [...boxContainer.querySelectorAll("button")];
+
+  initialButtons[winningBox].innerHTML =
+    "⭐<span>¡AQUÍ ESTÁ!</span>";
+
+  initialButtons[winningBox].style.borderColor = "#ffe08a";
+
+  initialButtons[winningBox].style.boxShadow =
+    "0 0 30px #ffe08a70";
 
   starPreview.textContent = "⭐";
 
   boxMessage.textContent =
-    "¡Memoriza bien la caja que contiene la estrella!";
+    "¡Memoriza la caja que contiene la estrella!";
 
   boxResult.textContent = "";
 
-  /*
-    Dejamos unos segundos para memorizar la posición.
-  */
-
-  await delay(1800);
-
-  if (thisRun !== shuffleRunId) return;
-
-  starPreview.textContent = "👀";
-
-  boxMessage.textContent =
-    "¡Atención, agente Gaby! ¡Las cajas comienzan a moverse!";
-
-  initialBoxes.forEach(box => {
-    box.innerHTML = "🎁<span>¡SÍGUEME!</span>";
-    box.style.borderColor = "";
-    box.style.boxShadow = "";
-  });
-
-  /*
-    Doce intercambios animados.
-    Cada movimiento intercambia las posiciones físicas de dos cajas.
-  */
-
-  const totalSwaps = 12;
-
-  for (let i = 0; i < totalSwaps; i++) {
-    if (thisRun !== shuffleRunId) return;
-
-    const currentBoxes = [...boxContainer.querySelectorAll(".mystery-box")];
-
-    const firstIndex = Math.floor(Math.random() * currentBoxes.length);
-
-    let secondIndex = Math.floor(Math.random() * currentBoxes.length);
-
-    while (secondIndex === firstIndex) {
-      secondIndex = Math.floor(Math.random() * currentBoxes.length);
-    }
-
-    const swapped = await animateSwap(
-      firstIndex,
-      secondIndex,
-      thisRun
-    );
-
-    if (!swapped || thisRun !== shuffleRunId) return;
+  setTimeout(() => {
+    starPreview.textContent = "👀";
 
     boxMessage.textContent =
-      "¡Sigue la estrella! Movimiento " + (i + 1) +
-      " de " + totalSwaps + " ✨";
+      "¡Atención! Las cajas se van a mezclar.";
 
-    await delay(140);
-  }
+    initialButtons.forEach(button => {
+      button.innerHTML = "🎁<span>¡SÍGUEME!</span>";
+      button.style.borderColor = "#ffffff30";
+      button.style.boxShadow = "";
+    });
 
-  if (thisRun !== shuffleRunId) return;
+    let remaining = 12;
 
-  isShuffling = false;
-  boxGameStarted = true;
+    function shuffleStep() {
+      if (remaining <= 0) {
+        boxGameStarted = true;
 
-  boxMessage.textContent =
-    "¡Última oportunidad de concentración!";
+        boxMessage.textContent =
+          "¡Elige dónde crees que está la estrella!";
 
-  starPreview.textContent = "🤔";
+        boxResult.textContent =
+          "Toca una caja para revelar tu respuesta.";
 
-  boxResult.textContent =
-    "Elige una caja y descubre si encontraste la estrella.";
+        boxContainer.querySelectorAll("button").forEach(button => {
+          button.disabled = false;
+        });
 
-  boxContainer.querySelectorAll(".mystery-box").forEach(box => {
-    box.disabled = false;
-  });
+        startShuffleButton.disabled = false;
+        startShuffleButton.hidden = true;
 
-  startShuffleButton.disabled = false;
-  startShuffleButton.hidden = true;
+        return;
+      }
+
+      const currentButtons =
+        [...boxContainer.querySelectorAll("button")];
+
+      const first = Math.floor(Math.random() * 3);
+
+      let second = Math.floor(Math.random() * 3);
+
+      while (second === first) {
+        second = Math.floor(Math.random() * 3);
+      }
+
+      const a = currentButtons[first];
+      const b = currentButtons[second];
+
+      const positionA = boxPositions[first];
+      const positionB = boxPositions[second];
+
+      const distance =
+        b.getBoundingClientRect().left -
+        a.getBoundingClientRect().left;
+
+      a.style.transform =
+        "translateX(" + distance + "px) translateY(-12px)";
+
+      b.style.transform =
+        "translateX(" + (-distance) + "px) translateY(12px)";
+
+      shuffleTimer = setTimeout(() => {
+        boxPositions[first] = positionB;
+        boxPositions[second] = positionA;
+
+        renderBoxes();
+
+        const updatedButtons =
+          [...boxContainer.querySelectorAll("button")];
+
+        updatedButtons.forEach(button => {
+          button.style.transform = "scale(1.04)";
+        });
+
+        setTimeout(() => {
+          updatedButtons.forEach(button => {
+            button.style.transform = "";
+          });
+
+          remaining--;
+
+          shuffleTimer = setTimeout(shuffleStep, 100);
+        }, 100);
+
+      }, 450);
+    }
+
+    shuffleTimer = setTimeout(shuffleStep, 600);
+
+  }, 1800);
 }
 
 function chooseBox(originalPosition) {
-  if (!boxGameStarted || boxFinished || isShuffling) return;
+  if (!boxGameStarted || boxFinished) return;
 
-  boxGameStarted = false;
+  const buttons =
+    [...boxContainer.querySelectorAll("button")];
 
-  const buttons = [...boxContainer.querySelectorAll(".mystery-box")];
+  buttons.forEach(button => button.disabled = true);
 
-  buttons.forEach(button => {
-    button.disabled = true;
-  });
-
-  const selectedButton = buttons.find(
-    button => Number(button.dataset.box) === originalPosition
+  const selectedButton = buttons.find(button =>
+    Number(button.dataset.box) === originalPosition
   );
-
-  if (!selectedButton) return;
 
   if (originalPosition === winningBox) {
     boxFinished = true;
+    boxGameStarted = false;
 
-    selectedButton.innerHTML = "⭐<span>¡GANADORA!</span>";
-    selectedButton.classList.add("box-winner");
+    selectedButton.innerHTML =
+      "⭐<span>¡GANADORA!</span>";
+
+    selectedButton.style.borderColor = "#ffe08a";
+    selectedButton.style.boxShadow =
+      "0 0 35px #ffe08a90";
 
     boxMessage.textContent =
-      "¡La estrella estaba aquí! ¡Misión completada!";
+      "¡Encontraste la estrella ganadora!";
 
     boxResult.innerHTML =
-      '<span style="color:#ffe08a">¡EXCELENTE, GABY! ⭐🏆</span>';
+      '<span style="color:#ffe08a">¡EXCELENTE, GABY! ⭐</span>';
 
     document.getElementById("box-success").hidden = false;
 
@@ -1541,27 +1391,21 @@ function chooseBox(originalPosition) {
     launchBalloons(10);
 
   } else {
-    selectedButton.innerHTML = "💨<span>CAJA VACÍA</span>";
-    selectedButton.classList.add("box-wrong");
+    selectedButton.innerHTML = "💨<span>VACÍA</span>";
+    selectedButton.style.borderColor = "#ff287f";
 
     boxMessage.textContent =
-      "¡Uy! Esa caja no tenía la estrella.";
+      "¡Casi! La estrella estaba en otra caja.";
 
     boxResult.textContent =
-      "¡No te rindas, agente Gaby! Puedes volver a intentarlo.";
+      "No te rindas, agente Gaby. ¡Puedes intentarlo otra vez!";
 
     retryBoxButton.hidden = false;
-    startShuffleButton.hidden = true;
 
     playWrongSound();
   }
 }
 
-function goToCodeScreen() {
-  if (!boxFinished) return;
-
-  showScreen("code-screen", 2);
-}
 
 /* ==========================================
    CÓDIGO SECRETO
@@ -1601,6 +1445,7 @@ document.getElementById("code-form").addEventListener("submit", event => {
   }
 });
 
+
 /* ==========================================
    PREGUNTA FINAL
    ========================================== */
@@ -1611,6 +1456,7 @@ function answerQuestion(index) {
   if (quizLocked) return;
 
   const feedback = document.getElementById("quiz-feedback");
+
   const buttons = document.querySelectorAll(".answer");
 
   if (index === 2) {
@@ -1620,9 +1466,7 @@ function answerQuestion(index) {
     feedback.textContent =
       "¡CORRECTO! ¡PREPÁRATE PARA LA SORPRESA!";
 
-    buttons.forEach(button => {
-      button.disabled = true;
-    });
+    buttons.forEach(button => button.disabled = true);
 
     playWinSound();
     launchConfetti(100);
@@ -1639,6 +1483,7 @@ function answerQuestion(index) {
   }
 }
 
+
 /* ==========================================
    CUENTA REGRESIVA
    ========================================== */
@@ -1647,6 +1492,7 @@ function startCountdown() {
   showScreen("countdown-screen", 4);
 
   let count = 3;
+
   const number = document.getElementById("count-number");
 
   number.textContent = count;
@@ -1656,6 +1502,7 @@ function startCountdown() {
 
     if (count > 0) {
       number.textContent = count;
+
     } else {
       clearInterval(timer);
 
@@ -1667,12 +1514,14 @@ function startCountdown() {
 
       setTimeout(() => {
         showScreen("reveal-screen", 5);
+
         launchConfetti(180);
         launchBalloons(15);
       }, 900);
     }
   }, 1000);
 }
+
 
 /* ==========================================
    CONFETI ANIMADO
@@ -1685,15 +1534,16 @@ let confettiPieces = [];
 let confettiRunning = false;
 
 function resizeCanvas() {
-  const dpr = window.devicePixelRatio || 1;
+  canvas.width = window.innerWidth * devicePixelRatio;
+  canvas.height = window.innerHeight * devicePixelRatio;
 
-  canvas.width = window.innerWidth * dpr;
-  canvas.height = window.innerHeight * dpr;
-
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.setTransform(
+    devicePixelRatio, 0, 0, devicePixelRatio, 0, 0
+  );
 }
 
 window.addEventListener("resize", resizeCanvas);
+
 resizeCanvas();
 
 function launchConfetti(amount = 100) {
@@ -1759,9 +1609,13 @@ function animateConfetti() {
     requestAnimationFrame(animateConfetti);
   } else {
     confettiRunning = false;
-    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+    ctx.clearRect(
+      0, 0, window.innerWidth, window.innerHeight
+    );
   }
 }
+
 
 /* ==========================================
    GLOBOS FLOTANTES
@@ -1775,19 +1629,23 @@ function launchBalloons(amount = 8) {
       const balloon = document.createElement("div");
 
       balloon.className = "balloon";
+
       balloon.textContent =
         emojis[Math.floor(Math.random() * emojis.length)];
 
       balloon.style.left = Math.random() * 90 + "%";
+
       balloon.style.animationDuration =
         (4 + Math.random() * 3) + "s";
 
       document.body.appendChild(balloon);
 
       setTimeout(() => balloon.remove(), 7500);
+
     }, i * 180);
   }
 }
+
 
 /* ==========================================
    CELEBRACIÓN FINAL
@@ -1798,7 +1656,8 @@ function celebrateAgain() {
   launchConfetti(180);
   launchBalloons(15);
 }
+
 </script>
 
 </body>
-  </html>
+</html>
