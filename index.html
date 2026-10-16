@@ -3,66 +3,98 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#090610">
-
-<title>Una misión secreta para Gaby</title>
+<meta name="theme-color" content="#0b0615">
+<title>Gaby's Secret Mission | Stray Kids</title>
 
 <style>
 :root {
-  --pink: #ff2d75;
-  --purple: #9d4dff;
-  --blue: #35d9ff;
-  --gold: #ffd66b;
-  --dark: #090610;
-  --panel: rgba(25, 16, 40, .91);
+  --pink: #ff287f;
+  --purple: #a34dff;
+  --blue: #43dcff;
+  --gold: #ffe08a;
+  --dark: #0b0615;
+  --panel: rgba(24, 15, 40, .93);
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
   min-height: 100vh;
   color: white;
-  background:
-    radial-gradient(ellipse at 50% 0%, #382050 0%, transparent 55%),
-    linear-gradient(160deg, #090610, #160a27 65%, #07050c);
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
+  background:
+    radial-gradient(ellipse at 50% -10%, #53226d 0%, transparent 55%),
+    linear-gradient(160deg, #0b0615, #170b28 60%, #08050e);
   overflow-x: hidden;
 }
 
-button, input {
-  font: inherit;
-}
+button, input { font: inherit; }
+button { -webkit-tap-highlight-color: transparent; cursor: pointer; }
 
-button {
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-
-#lights {
+#lights, #stage-lights {
   position: fixed;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
-  z-index: 0;
 }
+
+#lights { z-index: 0; }
+
+#stage-lights {
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+body.concert-mode #stage-lights { opacity: 1; }
 
 .light {
   position: absolute;
   width: 3px;
   height: 3px;
-  border-radius: 50%;
   background: white;
+  border-radius: 50%;
   box-shadow: 0 0 12px 3px var(--blue);
   animation: twinkle 2s infinite alternate;
 }
 
 @keyframes twinkle {
-  from { opacity: .2; transform: scale(.7); }
+  from { opacity: .15; transform: scale(.7); }
   to { opacity: 1; transform: scale(1.8); }
+}
+
+.stage-light {
+  position: absolute;
+  top: -10%;
+  width: 100px;
+  height: 120vh;
+  filter: blur(20px);
+  opacity: .22;
+  transform-origin: top center;
+  animation: sweep 3s ease-in-out infinite alternate;
+}
+
+.stage-light.one { left: 12%; background: #ff287f; }
+
+.stage-light.two {
+  right: 12%;
+  background: #43dcff;
+  animation-delay: -1.5s;
+}
+
+.stage-light.three {
+  left: 45%;
+  background: #a34dff;
+  animation-delay: -.8s;
+}
+
+@keyframes sweep {
+  from { transform: rotate(-30deg) scaleY(.8); }
+  to { transform: rotate(30deg) scaleY(1.1); }
 }
 
 header, main, footer {
@@ -70,142 +102,55 @@ header, main, footer {
   z-index: 1;
 }
 
-header {
-  padding: 18px 12px 0;
-}
+header { padding: 18px 12px 0; }
 
 .brand {
   display: inline-block;
-  padding: 8px 15px;
-  border: 1px solid #ffffff45;
+  padding: 9px 15px;
+  border: 1px solid #ffffff35;
   border-radius: 30px;
-  font-size: 11px;
-  letter-spacing: 4px;
   color: var(--blue);
-  background: #100a1dbb;
+  background: #100a1dcc;
+  font-size: 10px;
+  letter-spacing: 3px;
 }
 
 main {
   width: min(94%, 680px);
-  margin: 0 auto;
-  padding: 22px 0 45px;
-}
-
-h1 {
-  font-size: clamp(32px, 8vw, 58px);
-  line-height: 1;
-  margin: 20px 0;
-  text-transform: uppercase;
-  font-weight: 900;
-  letter-spacing: -1px;
-  text-shadow: 0 0 25px #a63dff75;
-}
-
-h2 {
-  font-size: clamp(23px, 5vw, 34px);
-  margin-top: 10px;
-}
-
-p {
-  line-height: 1.65;
-}
-
-.neon {
-  color: var(--pink);
-  text-shadow: 0 0 15px #ff2d7590;
-}
-
-.muted {
-  color: #c5b8d7;
-}
-
-.panel {
-  background: var(--panel);
-  border: 1px solid #ffffff20;
-  border-radius: 24px;
-  padding: 25px 18px;
-  box-shadow: 0 15px 55px #0006, 0 0 25px #9d4dff12;
-  backdrop-filter: blur(12px);
-  margin: 20px 0;
-}
-
-.screen {
-  display: none;
-  animation: appear .55s ease both;
-}
-
-.screen.active {
-  display: block;
-}
-
-@keyframes appear {
-  from { opacity: 0; transform: translateY(18px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-button.primary {
-  border: none;
-  border-radius: 15px;
-  padding: 16px 23px;
-  width: 100%;
-  color: white;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  background: linear-gradient(100deg, #ed2674, #833cff);
-  box-shadow: 0 7px 25px #a52cff42;
-  transition: transform .2s, filter .2s;
-  margin-top: 14px;
-}
-
-button.primary:active {
-  transform: scale(.97);
-}
-
-button.secondary {
-  background: #ffffff0c;
-  border: 1px solid #ffffff30;
-  color: white;
-  border-radius: 12px;
-  padding: 12px 16px;
-  margin-top: 12px;
-}
-
-.icon {
-  font-size: 65px;
-  margin: 12px 0;
-  filter: drop-shadow(0 0 20px #a64dff75);
+  margin: auto;
+  padding: 15px 0 45px;
 }
 
 .musicbar {
   position: sticky;
-  top: 8px;
-  z-index: 10;
+  top: 7px;
+  z-index: 20;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 10px;
-  background: #100b1beF;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  margin: 12px auto;
+  background: #100a1df5;
   border: 1px solid #ffffff25;
   border-radius: 14px;
-  padding: 10px 12px;
-  margin: 14px auto;
-  font-size: 12px;
+  font-size: 11px;
+  backdrop-filter: blur(10px);
 }
 
 .musicbar button {
-  border: 1px solid #ffffff30;
+  color: white;
+  border: 1px solid #ffffff35;
   border-radius: 20px;
   background: #ffffff10;
-  color: white;
-  padding: 8px 12px;
+  padding: 9px 12px;
 }
 
 .progress-wrap {
   height: 5px;
   background: #ffffff15;
   border-radius: 20px;
-  margin: 20px 0;
+  margin: 17px 0 12px;
   overflow: hidden;
 }
 
@@ -217,75 +162,220 @@ button.secondary {
 }
 
 #stage-label {
-  font-size: 11px;
-  letter-spacing: 3px;
   color: var(--blue);
+  font-size: 10px;
+  letter-spacing: 3px;
   text-transform: uppercase;
 }
 
+.screen { display: none; }
+
+.screen.active {
+  display: block;
+  animation: appear .55s ease both;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid #ffffff20;
+  border-radius: 23px;
+  padding: 24px 17px;
+  margin: 18px 0;
+  box-shadow: 0 15px 50px #0005, 0 0 25px #a34dff10;
+  backdrop-filter: blur(12px);
+}
+
+h1 {
+  font-size: clamp(32px, 8vw, 58px);
+  line-height: 1.03;
+  margin: 18px 0;
+  font-weight: 900;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  text-shadow: 0 0 25px #a34dff55;
+}
+
+h2 {
+  font-size: clamp(23px, 5vw, 34px);
+  line-height: 1.15;
+}
+
+p { line-height: 1.65; }
+
+.neon {
+  color: var(--pink);
+  text-shadow: 0 0 15px #ff287f80;
+}
+
+.muted { color: #c6bad8; }
+
+.icon {
+  font-size: 62px;
+  margin: 12px 0;
+  filter: drop-shadow(0 0 20px #a34dff70);
+}
+
+.primary {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  padding: 16px 14px;
+  margin-top: 14px;
+  color: white;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: linear-gradient(100deg, #f32478, #853bff);
+  box-shadow: 0 7px 25px #a52cff40;
+  transition: transform .2s, opacity .2s;
+}
+
+.primary:active { transform: scale(.97); }
+.primary:disabled { opacity: .5; cursor: not-allowed; }
+
+.secondary {
+  padding: 12px 16px;
+  margin-top: 12px;
+  border-radius: 12px;
+  border: 1px solid #ffffff30;
+  background: #ffffff0d;
+  color: white;
+}
+
+/* JUEGO DE LAS CAJAS */
+
 .boxes {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  margin: 25px 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 9px;
+  margin: 28px 0 15px;
+  min-height: 120px;
+  position: relative;
+  isolation: isolate;
 }
 
 .mystery-box {
+  position: relative;
+  flex: 1 1 0;
   min-width: 0;
+  max-width: 170px;
+  min-height: 115px;
+  padding: 17px 3px;
   border: 1px solid #ffffff30;
   border-radius: 15px;
-  padding: 18px 4px;
-  background: linear-gradient(145deg, #392052, #171020);
   color: white;
-  font-size: 37px;
-  box-shadow: inset 0 0 20px #ffffff05, 0 7px 15px #0005;
-  transition: transform .2s, border-color .2s;
-}
-
-.mystery-box:active {
-  transform: scale(.95);
+  background: linear-gradient(145deg, #48235d, #171020);
+  box-shadow: 0 7px 18px #0005;
+  font-size: 35px;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  transition:
+    border-color .25s,
+    box-shadow .25s,
+    background .25s,
+    filter .25s;
 }
 
 .mystery-box span {
   display: block;
   font-size: 10px;
+  margin-top: 9px;
   letter-spacing: 1px;
-  margin-top: 8px;
-  color: #d7c8e7;
 }
 
-.mystery-box:disabled {
-  cursor: default;
-  opacity: .9;
+.mystery-box:disabled { cursor: default; }
+
+.mystery-box:not(:disabled):active {
+  filter: brightness(1.4);
 }
 
-#box-result {
-  min-height: 55px;
-  font-weight: bold;
+.mystery-box.box-glow {
+  border-color: var(--blue);
+  box-shadow:
+    0 0 12px #43dcff80,
+    0 0 28px #a34dff70,
+    inset 0 0 14px #43dcff20;
+  animation: boxGlow 1s ease-in-out infinite alternate;
+}
+
+@keyframes boxGlow {
+  from {
+    filter: brightness(1);
+    box-shadow: 0 0 8px #43dcff60;
+  }
+  to {
+    filter: brightness(1.25);
+    box-shadow:
+      0 0 18px #43dcffb0,
+      0 0 32px #a34dff90,
+      inset 0 0 15px #ffffff20;
+  }
+}
+
+.mystery-box.box-winner {
+  border-color: var(--gold) !important;
+  background: linear-gradient(145deg, #775126, #332018);
+  box-shadow:
+    0 0 18px #ffe08a,
+    0 0 42px #ffe08a90,
+    inset 0 0 20px #ffe08a30;
+  animation: winnerPulse .7s ease-in-out infinite alternate;
+}
+
+@keyframes winnerPulse {
+  from { transform: scale(1); filter: brightness(1); }
+  to { transform: scale(1.06); filter: brightness(1.4); }
+}
+
+.mystery-box.box-wrong {
+  border-color: var(--pink) !important;
+  background: linear-gradient(145deg, #612039, #21101b);
+  box-shadow: 0 0 20px #ff287f90;
+  animation: wrongBox .35s ease;
+}
+
+@keyframes wrongBox {
+  20% { transform: translateX(-5px); }
+  40% { transform: translateX(5px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+  100% { transform: translateX(0); }
+}
+
+#shuffle-status { padding: 14px; margin: 20px 0 10px; }
+#star-preview { font-size: 45px; }
+
+#box-result,
+#shuffle-message,
+#code-feedback,
+#quiz-feedback {
+  min-height: 28px;
 }
 
 input[type="text"] {
   width: 100%;
-  border: 1px solid #ffffff30;
-  background: #090610;
+  padding: 17px 10px;
+  margin: 15px 0 5px;
   color: white;
-  padding: 17px;
-  text-align: center;
-  font-size: 22px;
-  font-weight: bold;
+  background: #090610;
+  border: 1px solid #ffffff30;
   border-radius: 13px;
   outline: none;
+  text-align: center;
+  font-size: 21px;
+  font-weight: bold;
   letter-spacing: 3px;
-  margin: 15px 0 5px;
 }
 
 input:focus {
   border-color: var(--blue);
-  box-shadow: 0 0 18px #35d9ff22;
-}
-
-#code-feedback {
-  min-height: 28px;
+  box-shadow: 0 0 18px #43dcff25;
 }
 
 .answers {
@@ -296,36 +386,25 @@ input:focus {
 
 .answer {
   width: 100%;
-  text-align: left;
   padding: 16px;
+  text-align: left;
   color: white;
-  background: #ffffff08;
+  background: #ffffff09;
   border: 1px solid #ffffff25;
   border-radius: 13px;
   line-height: 1.5;
   transition: .2s;
 }
 
-.answer:hover {
-  border-color: var(--purple);
-  background: #9d4dff16;
-}
-
-.answer:disabled {
-  opacity: .8;
-}
-
-#quiz-feedback {
-  min-height: 35px;
-  font-weight: bold;
-}
+.answer:active { transform: scale(.98); }
+.answer:disabled { opacity: .8; }
 
 .count-number {
   font-size: clamp(100px, 30vw, 180px);
   font-weight: 900;
-  color: var(--pink);
-  text-shadow: 0 0 45px #ff2d7588;
   line-height: 1;
+  color: var(--pink);
+  text-shadow: 0 0 45px #ff287f90;
   animation: pulse .8s infinite alternate;
 }
 
@@ -333,61 +412,54 @@ input:focus {
   to { transform: scale(1.06); }
 }
 
+/* BOLETOS */
+
 .ticket {
-  position: relative;
-  color: #201126;
-  background: linear-gradient(135deg, #fff6df, #ffd7ed);
-  border-radius: 18px;
   overflow: hidden;
+  margin: 22px 0;
+  color: #28152d;
   text-align: left;
-  margin: 20px 0;
-  box-shadow: 0 0 35px #ff2d7530;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #fff8e6, #ffd9ed);
+  box-shadow: 0 0 30px #ff287f30;
 }
 
 .ticket-top {
-  padding: 18px;
+  padding: 19px 12px;
   color: white;
-  background: linear-gradient(100deg, #29143f, #7b1d72, #29143f);
   text-align: center;
+  background: linear-gradient(100deg, #251139, #82216f, #251139);
+  background-size: 200% 100%;
+  animation: ticketLights 4s linear infinite;
 }
 
-.ticket-top small {
-  letter-spacing: 4px;
-  color: #ffb9df;
+@keyframes ticketLights {
+  to { background-position: 200% 0; }
 }
 
-.ticket-top h3 {
-  margin: 10px 0 3px;
-  font-size: 27px;
-}
-
-.ticket-body {
-  padding: 20px;
-}
-
-.ticket-title {
-  font-size: 24px;
-  font-weight: 900;
-  margin: 0 0 12px;
-}
+.ticket-top small { color: #ffbee0; letter-spacing: 4px; }
+.ticket-top h3 { margin: 10px 0; font-size: 28px; }
+.ticket-body { padding: 19px; }
+.ticket-title { margin-top: 0; font-size: 22px; font-weight: 900; }
 
 .ticket-info {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 15px 10px;
-  margin: 18px 0;
+  gap: 18px 10px;
+  margin: 20px 0;
 }
 
 .ticket-info small {
   display: block;
+  color: #775b7a;
   font-size: 10px;
   letter-spacing: 1px;
-  color: #765b78;
-  margin-bottom: 4px;
+  margin-bottom: 5px;
 }
 
 .ticket-info strong {
   font-size: 14px;
+  overflow-wrap: anywhere;
 }
 
 .ticket-divider {
@@ -396,17 +468,17 @@ input:focus {
 }
 
 .ticket-number {
+  color: #785c78;
+  text-align: center;
   font-size: 10px;
   letter-spacing: 2px;
-  text-align: center;
-  color: #785c78;
 }
 
 .ticket-footer {
   padding: 15px;
   background: #f7c9e3;
-  font-size: 12px;
   text-align: center;
+  font-size: 12px;
   font-weight: bold;
 }
 
@@ -421,51 +493,83 @@ input:focus {
 
 .balloon {
   position: fixed;
-  bottom: -150px;
-  z-index: 50;
+  bottom: -100px;
+  z-index: 90;
   font-size: 42px;
-  animation: floatUp 5s linear forwards;
   pointer-events: none;
+  animation: floatUp 5s linear forwards;
 }
 
 @keyframes floatUp {
   to {
-    transform: translateY(-120vh) rotate(15deg);
+    transform: translateY(-120vh) rotate(18deg);
     opacity: 0;
   }
 }
 
-.heart {
-  color: var(--pink);
+#reveal-screen.active {
+  animation: concertEntrance 1s ease both;
+}
+
+@keyframes concertEntrance {
+  0% { opacity: 0; transform: scale(.88); filter: brightness(2); }
+  65% { opacity: 1; transform: scale(1.02); }
+  100% { opacity: 1; transform: scale(1); filter: brightness(1); }
+}
+
+#reveal-screen.active .ticket {
+  animation: ticketEntrance .8s ease both;
+}
+
+#reveal-screen.active .ticket:nth-of-type(2) {
+  animation-delay: .3s;
+}
+
+@keyframes ticketEntrance {
+  from { opacity: 0; transform: translateY(35px) rotate(-2deg); }
+  to { opacity: 1; transform: translateY(0) rotate(0); }
+}
+
+#reveal-screen.active h1 {
+  animation: titleGlow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+  from { text-shadow: 0 0 10px #ff287f60; }
+  to {
+    text-shadow: 0 0 15px #ff287f, 0 0 40px #a34dff,
+                 0 0 65px #43dcff50;
+  }
+}
+
+.shake { animation: shake .3s; }
+
+@keyframes shake {
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-3px); }
 }
 
 footer {
-  padding: 15px;
-  color: #8f809e;
+  padding: 20px 10px;
+  color: #9c8baa;
   font-size: 11px;
 }
 
-.shake {
-  animation: shake .35s;
-}
-
-@keyframes shake {
-  25% { transform: translateX(-6px); }
-  50% { transform: translateX(6px); }
-  75% { transform: translateX(-4px); }
-}
+[hidden] { display: none !important; }
 
 @media (max-width: 380px) {
-  .panel { padding: 20px 13px; }
-  .mystery-box { font-size: 30px; }
+  .panel { padding: 20px 12px; }
+  .mystery-box { font-size: 29px; }
+  .mystery-box span { font-size: 9px; }
   .ticket-info strong { font-size: 12px; }
+  .boxes { gap: 6px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
   }
 }
 </style>
@@ -474,6 +578,13 @@ footer {
 <body>
 
 <div id="lights"></div>
+
+<div id="stage-lights">
+  <div class="stage-light one"></div>
+  <div class="stage-light two"></div>
+  <div class="stage-light three"></div>
+</div>
+
 <canvas id="confetti"></canvas>
 
 <header>
@@ -484,7 +595,7 @@ footer {
 
   <div class="musicbar">
     <span>🎧 MODO CONCIERTO</span>
-    <button id="music-toggle" type="button">▶ Activar música</button>
+    <button id="music-toggle" type="button">▶ ACTIVAR MÚSICA</button>
   </div>
 
   <audio id="bg-music" loop preload="none">
@@ -503,9 +614,9 @@ footer {
     <div id="progress"></div>
   </div>
 
-  <div id="stage-label">Misión 01 · Acceso autorizado</div>
+  <div id="stage-label">MISIÓN 01 · ACCESO AUTORIZADO</div>
 
-  <!-- PANTALLA 1: BIENVENIDA -->
+  <!-- 1. BIENVENIDA -->
 
   <section class="screen active" id="welcome">
     <div class="panel">
@@ -515,108 +626,134 @@ footer {
         ATENCIÓN, GABY
       </p>
 
-      <h1>Hay una sorpresa<br>
-      <span class="neon">para ti</span></h1>
+      <h1>
+        HAY UNA<br>
+        <span class="neon">SORPRESA</span><br>
+        PARA TI
+      </h1>
 
-      <p>
-        ¡Bienvenida a tu misión secreta!
-      </p>
+      <p>¡Bienvenida a tu misión secreta!</p>
 
       <p class="muted">
-        Una aventura especial te está esperando.
-        Pero para descubrirla tendrás que demostrar
-        que tienes lo necesario para superar todos
-        los retos.
+        Algo muy especial te está esperando.
+        Pero primero tendrás que demostrar que eres
+        capaz de superar todos los retos.
       </p>
 
-      <p>
-        ¿Estás lista para desbloquear tu sorpresa?
-      </p>
+      <p>¿Estás lista para descubrir tu sorpresa?</p>
 
-      <div style="font-size:38px;margin:18px">🎤 ✨ 🎶</div>
+      <div class="icon">🎤 ✨ 🎶</div>
 
       <button class="primary" onclick="startMission()">
         COMENZAR MISIÓN 🚀
       </button>
 
       <p class="muted" style="font-size:11px">
-        Solo para Gaby · Acceso ultrasecreto
+        Una aventura creada especialmente para ti ❤️
       </p>
     </div>
   </section>
 
-  <!-- PANTALLA 2: LAS CAJAS -->
+  <!-- 2. JUEGO DE LAS CAJAS -->
 
   <section class="screen" id="boxes-screen">
     <div class="panel">
+
       <div class="icon">🎁</div>
 
-      <h2>El reto de las <span class="neon">cajas misteriosas</span></h2>
+      <p class="neon" style="letter-spacing:3px">
+        RETO NÚMERO 01
+      </p>
+
+      <h2>ENCUENTRA LA <span class="neon">ESTRELLA</span></h2>
 
       <p class="muted">
-        Una estrella ganadora está escondida en una
-        de estas tres cajas.
+        Una estrella mágica está escondida en una de estas tres cajas.
       </p>
 
-      <p>
-        Observa bien. ¡La suerte está de tu lado!
-      </p>
-
-      <div class="boxes" id="boxes">
-        <button class="mystery-box" onclick="chooseBox(0)">
-          🎁<span>CAJA 01</span>
-        </button>
-
-        <button class="mystery-box" onclick="chooseBox(1)">
-          🎁<span>CAJA 02</span>
-        </button>
-
-        <button class="mystery-box" onclick="chooseBox(2)">
-          🎁<span>CAJA 03</span>
-        </button>
-      </div>
-
-      <div id="box-result" aria-live="polite">
-        Elige una caja para descubrir lo que esconde.
-      </div>
-
-      <button id="retry-box" class="secondary"
-              onclick="resetBoxes()" hidden>
-        🔄 INTENTAR OTRA VEZ
-      </button>
-
-      <div id="box-success" hidden>
-        <p class="neon">¡LO LOGRASTE, GABY! ⭐</p>
-
-        <p>
-          Has encontrado la estrella ganadora.
-          Pero tu siguiente pista no está aquí...
-        </p>
-
+      <div id="accept-challenge">
         <div class="panel">
-          <div style="font-size:40px">🎒</div>
-          <strong>¡VE A LA MOCHILA DE PAPÁ!</strong>
+          <div class="icon">💜</div>
+          <h3>AGENTE GABY</h3>
+
+          <p>
+            Tu primera misión consiste en encontrar la estrella mágica.
+            Observa con atención, porque las cajas se moverán rápidamente.
+          </p>
+
           <p class="muted">
-            Busca el código secreto que está escondido
-            allí. Lo necesitarás para desbloquear
-            el siguiente nivel.
+            ¿Tienes la concentración necesaria para superar el desafío?
+          </p>
+
+          <button class="primary" type="button"
+                  onclick="acceptBoxChallenge()">
+            💜 ¡ACEPTO EL RETO!
+          </button>
+        </div>
+      </div>
+
+      <div id="game-area" hidden>
+
+        <p>¡Observa dónde está y sigue su movimiento!</p>
+
+        <div id="shuffle-status" class="panel">
+          <div id="star-preview">⭐</div>
+          <p id="shuffle-message">
+            Presiona el botón para comenzar el desafío.
           </p>
         </div>
 
-        <button class="primary" onclick="showScreen('code-screen',2)">
-          YA TENGO EL CÓDIGO 🔐
+        <div class="boxes" id="boxes"></div>
+
+        <p id="box-result" aria-live="polite">
+          ¡Presta mucha atención!
+        </p>
+
+        <button class="primary" id="start-shuffle"
+                onclick="startBoxGame()">
+          ✨ INICIAR DESAFÍO
         </button>
+
+        <button id="retry-box" class="secondary"
+                onclick="startBoxGame()" hidden>
+          🔄 VOLVER A INTENTAR
+        </button>
+
+        <div id="box-success" hidden>
+          <div class="icon">🏆</div>
+          <h2 class="neon">¡LO LOGRASTE, GABY!</h2>
+
+          <p>
+            ¡Has encontrado la estrella ganadora!
+            Pero tu siguiente pista no está aquí.
+          </p>
+
+          <div class="panel">
+            <div class="icon">🎒</div>
+            <h3>¡VE A LA MOCHILA DE PAPÁ!</h3>
+
+            <p class="muted">
+              Busca el código secreto que está escondido allí.
+              Lo necesitarás para desbloquear el siguiente nivel.
+            </p>
+          </div>
+
+          <button class="primary" onclick="goToCodeScreen()">
+            YA TENGO EL CÓDIGO 🔐
+          </button>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- PANTALLA 3: CÓDIGO -->
+  <!-- 3. CÓDIGO SECRETO -->
 
   <section class="screen" id="code-screen">
     <div class="panel">
-      <div class="icon">🔐</div>
 
-      <h2>Acceso <span class="neon">restringido</span></h2>
+      <div class="icon">🔐</div>
+      <h2>ACCESO <span class="neon">RESTRINGIDO</span></h2>
 
       <p>
         Agente Gaby, introduce el código que encontraste
@@ -624,13 +761,15 @@ footer {
       </p>
 
       <form id="code-form">
-        <input id="secret-code"
-               type="text"
-               placeholder="CÓDIGO SECRETO"
-               autocomplete="off"
-               aria-label="Código secreto"
-               maxlength="20"
-               required>
+        <input
+          id="secret-code"
+          type="text"
+          placeholder="CÓDIGO SECRETO"
+          autocomplete="off"
+          aria-label="Código secreto"
+          maxlength="20"
+          required
+        >
 
         <button class="primary" type="submit">
           DESBLOQUEAR NIVEL 🔓
@@ -640,23 +779,24 @@ footer {
       <p id="code-feedback" aria-live="polite"></p>
 
       <p class="muted" style="font-size:12px">
-        Pista: el código está donde papá guarda
-        algunas de sus cosas.
+        La próxima pista te espera al otro lado...
       </p>
+
     </div>
   </section>
 
-  <!-- PANTALLA 4: PREGUNTA -->
+  <!-- 4. PREGUNTA FINAL -->
 
   <section class="screen" id="quiz-screen">
     <div class="panel">
+
       <div class="icon">🧠</div>
 
       <p class="neon" style="letter-spacing:3px">
         ÚLTIMO DESAFÍO
       </p>
 
-      <h2>Una pregunta importante...</h2>
+      <h2>UNA PREGUNTA IMPORTANTE...</h2>
 
       <p>
         Gaby, ¿qué evento especial hay el
@@ -664,67 +804,70 @@ footer {
       </p>
 
       <div class="answers">
+
         <button class="answer" onclick="answerQuestion(0)">
           🌧️ A) Un día lluvioso para quedarse en casa.
         </button>
 
         <button class="answer" onclick="answerQuestion(1)">
-          💼 B) Papá no va a trabajar.
+          💼 B) ¡Papá no va a trabajar!
         </button>
 
         <button class="answer" onclick="answerQuestion(2)">
-          🎤 C) ¡La función de cine de Stray Kids
-          en Cinépolis!
+          🎤 C) ¡La función de cine de Stray Kids en Cinépolis!
         </button>
+
       </div>
 
       <p id="quiz-feedback" aria-live="polite"></p>
+
     </div>
   </section>
 
-  <!-- PANTALLA 5: CUENTA REGRESIVA -->
+  <!-- 5. CUENTA REGRESIVA -->
 
   <section class="screen" id="countdown-screen">
     <div class="panel">
-      <div class="icon">🏆</div>
 
+      <div class="icon">🏆</div>
       <h2>¡MISIÓN COMPLETADA!</h2>
 
-      <p>
-        Has desbloqueado tu sorpresa, Gaby.
-      </p>
+      <p>Has desbloqueado tu sorpresa, Gaby.</p>
 
-      <p class="neon">
-        ¡Prepárate para descubrirla!
-      </p>
+      <p class="neon">¡PREPÁRATE PARA DESCUBRIRLA!</p>
 
       <div id="count-number" class="count-number">3</div>
 
       <p class="muted">
         La sorpresa está a punto de revelarse...
       </p>
+
     </div>
   </section>
 
-  <!-- PANTALLA 6: BOLETOS -->
+  <!-- 6. REVELACIÓN -->
 
   <section class="screen" id="reveal-screen">
     <div class="panel">
+
       <div class="icon">🎉</div>
 
       <p class="neon" style="letter-spacing:3px">
         ¡SORPRESA, GABY!
       </p>
 
-      <h1>¡NOS VAMOS A VER<br>
-      <span class="neon">STRAY KIDS!</span></h1>
+      <h1>
+        ¡NOS VAMOS A VER<br>
+        <span class="neon">STRAY KIDS!</span>
+      </h1>
 
       <p>
-        ¡Prepárate para vivir una experiencia
-        increíble con papá! ❤️
+        ¡Prepárate para vivir una experiencia increíble
+        con papá! ❤️
       </p>
 
       <div class="ticket">
+
         <div class="ticket-top">
           <small>WORLD TOUR</small>
           <h3>STRAY KIDS</h3>
@@ -732,17 +875,15 @@ footer {
         </div>
 
         <div class="ticket-body">
-          <p class="ticket-title">
-            🎟️ BOLETO VIP DE LA SORPRESA
-          </p>
+
+          <p class="ticket-title">🎟️ BOLETO ESPECIAL DE GABY</p>
 
           <p>
-            Este boleto representa una invitación
-            muy especial para compartir un día
-            inolvidable.
+            Una invitación para compartir un día inolvidable.
           </p>
 
           <div class="ticket-info">
+
             <div>
               <small>FECHA</small>
               <strong>SÁBADO 7 NOV. 2026</strong>
@@ -762,21 +903,25 @@ footer {
               <small>ACOMPAÑANTE</small>
               <strong>PAPÁ ❤️</strong>
             </div>
+
           </div>
 
           <div class="ticket-divider"></div>
 
           <div class="ticket-number">
-            GABY · ENTRADA ESPECIAL · SKZ-2026
+            GABY · INVITACIÓN ESPECIAL · SKZ-2026
           </div>
+
         </div>
 
         <div class="ticket-footer">
           UNA EXPERIENCIA PARA RECORDAR ✨
         </div>
+
       </div>
 
       <div class="ticket">
+
         <div class="ticket-top">
           <small>ADMIT ONE</small>
           <h3>INVITACIÓN ESPECIAL</h3>
@@ -784,14 +929,15 @@ footer {
         </div>
 
         <div class="ticket-body">
+
           <p class="ticket-title">🎟️ SEGUNDO BOLETO</p>
 
           <p>
-            Porque las mejores aventuras se disfrutan
-            juntos.
+            Porque las mejores aventuras se disfrutan juntos.
           </p>
 
           <div class="ticket-info">
+
             <div>
               <small>EVENTO</small>
               <strong>STRAY KIDS</strong>
@@ -811,6 +957,7 @@ footer {
               <small>DESTINO</small>
               <strong>¡EL CINE!</strong>
             </div>
+
           </div>
 
           <div class="ticket-divider"></div>
@@ -818,21 +965,21 @@ footer {
           <div class="ticket-number">
             MISIÓN PADRE E HIJA · RECUERDOS INOLVIDABLES
           </div>
+
         </div>
 
         <div class="ticket-footer">
           ¡NOS VEMOS EN EL SHOW! 💜
         </div>
+
       </div>
 
       <div class="panel">
+
         <div class="icon">💌</div>
+        <h2>UN MENSAJE DE <span class="neon">PAPÁ</span></h2>
 
-        <h2>Un mensaje de <span class="neon">papá</span></h2>
-
-        <p>
-          Mi querida Gaby:
-        </p>
+        <p>Mi querida Gaby:</p>
 
         <p>
           Espero que estés muy feliz con esta sorpresa.
@@ -841,10 +988,9 @@ footer {
         </p>
 
         <p>
-          Quiero que nos la pasemos increíble, que
-          cantemos, que disfrutemos cada momento y
-          que guardemos este día como un recuerdo
-          muy bonito de los dos.
+          Quiero que nos la pasemos increíble, que cantemos,
+          que disfrutemos cada momento y que guardemos este día
+          como un recuerdo muy bonito de los dos.
         </p>
 
         <p>
@@ -853,25 +999,25 @@ footer {
           es compartir esta experiencia contigo.
         </p>
 
-        <h2 class="neon">
-          ¡TE QUIERO MUCHÍSIMO, GABY! ❤️
-        </h2>
+        <h2 class="neon">¡TE QUIERO MUCHÍSIMO, GABY! ❤️</h2>
 
         <p>Con todo mi amor,</p>
 
-        <p style="font-size:23px;font-weight:bold">
+        <p style="font-size:24px;font-weight:bold">
           Papá ❤️
         </p>
+
       </div>
 
       <button class="primary" onclick="celebrateAgain()">
         🎉 ¡CELEBRAR OTRA VEZ!
       </button>
 
-      <p class="muted" style="font-size:12px">
-        Esta página es una invitación sorpresa,
-        no un boleto oficial de acceso.
+      <p class="muted" style="font-size:11px">
+        Invitación sorpresa conmemorativa.
+        No es un boleto oficial de acceso.
       </p>
+
     </div>
   </section>
 
@@ -883,40 +1029,37 @@ footer {
 
 <script>
 /* ==========================================
-   CONFIGURACIÓN PERSONALIZABLE
+   CONFIGURACIÓN
    ========================================== */
 
 const SECRET_CODE = "SKZ2026";
-
-// Si quieres que la música comience a partir de
-// una parte concreta, cambia currentTime abajo.
 const MUSIC_START_SECONDS = 0;
 
 /* ==========================================
-   LUCES ANIMADAS
+   LUCES DE FONDO
    ========================================== */
 
 const lights = document.getElementById("lights");
 
 for (let i = 0; i < 65; i++) {
   const light = document.createElement("div");
+
   light.className = "light";
   light.style.left = Math.random() * 100 + "%";
   light.style.top = Math.random() * 100 + "%";
   light.style.animationDelay = Math.random() * 3 + "s";
   light.style.animationDuration = (1 + Math.random() * 3) + "s";
 
-  if (i % 3 === 0) {
-    light.style.boxShadow = "0 0 12px 3px #ff2d75";
-  } else if (i % 3 === 1) {
-    light.style.boxShadow = "0 0 12px 3px #9d4dff";
-  }
+  const glowColors = ["#43dcff", "#ff287f", "#a34dff"];
+
+  light.style.boxShadow =
+    "0 0 12px 3px " + glowColors[i % glowColors.length];
 
   lights.appendChild(light);
 }
 
 /* ==========================================
-   MÚSICA
+   AUDIO
    ========================================== */
 
 const bgMusic = document.getElementById("bg-music");
@@ -924,26 +1067,22 @@ const winSound = document.getElementById("win-sound");
 const wrongSound = document.getElementById("wrong-sound");
 const musicToggle = document.getElementById("music-toggle");
 
-bgMusic.volume = 0.35;
+bgMusic.volume = 0.30;
 winSound.volume = 0.9;
-wrongSound.volume = 0.7;
-
-let musicEnabled = false;
+wrongSound.volume = 0.65;
 
 musicToggle.addEventListener("click", async () => {
   if (bgMusic.paused) {
     try {
       bgMusic.currentTime = MUSIC_START_SECONDS;
       await bgMusic.play();
-      musicEnabled = true;
-      musicToggle.textContent = "❚❚ Pausar música";
+      musicToggle.textContent = "❚❚ PAUSAR MÚSICA";
     } catch (error) {
-      musicToggle.textContent = "No se pudo reproducir";
+      musicToggle.textContent = "NO SE PUDO REPRODUCIR";
     }
   } else {
     bgMusic.pause();
-    musicEnabled = false;
-    musicToggle.textContent = "▶ Activar música";
+    musicToggle.textContent = "▶ ACTIVAR MÚSICA";
   }
 });
 
@@ -961,7 +1100,7 @@ function playWrongSound() {
    NAVEGACIÓN
    ========================================== */
 
-const screens = [
+const screenIds = [
   "welcome",
   "boxes-screen",
   "code-screen",
@@ -970,104 +1109,458 @@ const screens = [
   "reveal-screen"
 ];
 
+const stageLabels = [
+  "MISIÓN 01 · ACCESO AUTORIZADO",
+  "MISIÓN 02 · CAJAS MISTERIOSAS",
+  "MISIÓN 03 · CÓDIGO SECRETO",
+  "MISIÓN 04 · ÚLTIMO DESAFÍO",
+  "MISIÓN 05 · REVELANDO SORPRESA",
+  "MISIÓN COMPLETADA · ¡FELICIDADES, GABY!"
+];
+
 function showScreen(id, stage) {
-  screens.forEach(screenId => {
+  screenIds.forEach(screenId => {
     document.getElementById(screenId).classList.remove("active");
   });
 
   document.getElementById(id).classList.add("active");
 
   document.getElementById("progress").style.width =
-    ((stage / 5) * 100) + "%";
-
-  const labels = [
-    "Misión 01 · Acceso autorizado",
-    "Misión 02 · Cajas misteriosas",
-    "Misión 03 · Código secreto",
-    "Misión 04 · Último desafío",
-    "Misión 05 · Revelando sorpresa",
-    "Misión completada · ¡Felicidades, Gaby!"
-  ];
+    (stage / 5 * 100) + "%";
 
   document.getElementById("stage-label").textContent =
-    labels[stage] || labels[0];
+    stageLabels[stage] || stageLabels[0];
 
   window.scrollTo({ top: 0, behavior: "smooth" });
+
+  if (id === "reveal-screen") {
+    document.body.classList.add("concert-mode");
+  }
 }
 
 function startMission() {
+  resetBoxChallenge();
   showScreen("boxes-screen", 1);
 }
 
 /* ==========================================
-   JUEGO DE LAS CAJAS
+   ACEPTAR EL RETO
    ========================================== */
 
-let winningBox = Math.floor(Math.random() * 3);
+function acceptBoxChallenge() {
+  document.getElementById("accept-challenge").hidden = true;
+  document.getElementById("game-area").hidden = false;
+
+  document.getElementById("shuffle-status").hidden = false;
+  document.getElementById("boxes").hidden = false;
+
+  document.getElementById("start-shuffle").hidden = false;
+  document.getElementById("start-shuffle").disabled = false;
+
+  document.getElementById("retry-box").hidden = true;
+  document.getElementById("box-success").hidden = true;
+
+  document.getElementById("star-preview").textContent = "⭐";
+
+  document.getElementById("shuffle-message").textContent =
+    "¡Reto aceptado! Presiona INICIAR DESAFÍO para comenzar.";
+
+  document.getElementById("box-result").textContent =
+    "¡Mucha suerte, agente Gaby! ⭐";
+
+  resetBoxPositions();
+}
+
+/* ==========================================
+   JUEGO ANIMADO DE LAS CAJAS
+   ========================================== */
+
+const boxContainer = document.getElementById("boxes");
+const boxMessage = document.getElementById("shuffle-message");
+const boxResult = document.getElementById("box-result");
+const starPreview = document.getElementById("star-preview");
+const startShuffleButton = document.getElementById("start-shuffle");
+const retryBoxButton = document.getElementById("retry-box");
+
+let winningBox = 0;
 let boxFinished = false;
+let boxGameStarted = false;
+let isShuffling = false;
+let shuffleTimer = null;
+let shuffleRunId = 0;
 
-function chooseBox(index) {
-  if (boxFinished) return;
+/*
+  Cada caja conserva su identidad:
+  0, 1 o 2.
 
-  const buttons = document.querySelectorAll(".mystery-box");
-  const result = document.getElementById("box-result");
+  Cuando se intercambian, se mueven físicamente en pantalla
+  y después cambian de lugar dentro del contenedor.
+*/
 
-  if (index === winningBox) {
+function createBox(originalPosition) {
+  const button = document.createElement("button");
+
+  button.type = "button";
+  button.className = "mystery-box";
+  button.dataset.box = originalPosition;
+
+  button.innerHTML =
+    "🎁<span>CAJA 0" + (originalPosition + 1) + "</span>";
+
+  button.disabled = true;
+
+  button.addEventListener("click", () => {
+    chooseBox(Number(button.dataset.box));
+  });
+
+  return button;
+}
+
+function resetBoxPositions() {
+  clearTimeout(shuffleTimer);
+
+  shuffleRunId++;
+
+  boxFinished = false;
+  boxGameStarted = false;
+  isShuffling = false;
+
+  boxContainer.innerHTML = "";
+
+  for (let i = 0; i < 3; i++) {
+    boxContainer.appendChild(createBox(i));
+  }
+
+  document.getElementById("box-success").hidden = true;
+  retryBoxButton.hidden = true;
+
+  startShuffleButton.hidden = false;
+  startShuffleButton.disabled = false;
+
+  boxMessage.textContent =
+    "¡Reto aceptado! Presiona INICIAR DESAFÍO para comenzar.";
+
+  boxResult.textContent = "¡Mucha suerte, agente Gaby! ⭐";
+  starPreview.textContent = "⭐";
+}
+
+function resetBoxChallenge() {
+  clearTimeout(shuffleTimer);
+
+  shuffleRunId++;
+
+  boxFinished = false;
+  boxGameStarted = false;
+  isShuffling = false;
+
+  document.getElementById("accept-challenge").hidden = false;
+  document.getElementById("game-area").hidden = true;
+  document.getElementById("box-success").hidden = true;
+  document.getElementById("retry-box").hidden = true;
+
+  document.getElementById("start-shuffle").hidden = false;
+  document.getElementById("start-shuffle").disabled = false;
+
+  document.getElementById("shuffle-message").textContent =
+    "¿Estás lista para encontrar la estrella?";
+
+  document.getElementById("box-result").textContent =
+    "Primero debes aceptar el reto, agente Gaby.";
+
+  boxContainer.innerHTML = "";
+
+  for (let i = 0; i < 3; i++) {
+    boxContainer.appendChild(createBox(i));
+  }
+}
+
+/*
+  Intercambia dos cajas con movimiento real.
+
+  Primero calcula sus posiciones actuales.
+  Luego anima cada caja hacia la posición de la otra.
+  Finalmente reorganiza los elementos del HTML.
+
+  La identidad de cada caja permanece en data-box,
+  por lo que la estrella nunca cambia de caja por error.
+*/
+
+async function animateSwap(firstIndex, secondIndex, runId) {
+  if (runId !== shuffleRunId) return false;
+
+  const buttons = [...boxContainer.querySelectorAll(".mystery-box")];
+
+  const firstBox = buttons[firstIndex];
+  const secondBox = buttons[secondIndex];
+
+  if (!firstBox || !secondBox) return false;
+
+  const firstRect = firstBox.getBoundingClientRect();
+  const secondRect = secondBox.getBoundingClientRect();
+
+  const distanceX = secondRect.left - firstRect.left;
+
+  firstBox.classList.add("box-glow");
+  secondBox.classList.add("box-glow");
+
+  const animationOptions = {
+    duration: 480,
+    easing: "cubic-bezier(.22,.8,.25,1)",
+    fill: "forwards"
+  };
+
+  const firstAnimation = firstBox.animate(
+    [
+      { transform: "translate3d(0,0,0) scale(1)" },
+      {
+        transform:
+          "translate3d(" + distanceX + "px,-12px,0) scale(1.08)"
+      }
+    ],
+    animationOptions
+  );
+
+  const secondAnimation = secondBox.animate(
+    [
+      { transform: "translate3d(0,0,0) scale(1)" },
+      {
+        transform:
+          "translate3d(" + (-distanceX) + "px,12px,0) scale(1.08)"
+      }
+    ],
+    animationOptions
+  );
+
+  await Promise.all([
+    firstAnimation.finished.catch(() => {}),
+    secondAnimation.finished.catch(() => {})
+  ]);
+
+  if (runId !== shuffleRunId) {
+    firstAnimation.cancel();
+    secondAnimation.cancel();
+    return false;
+  }
+
+  /*
+    Reordenar los elementos intercambia sus lugares reales.
+    Los data-box no cambian: cada caja sigue siendo la misma.
+  */
+
+  const currentBoxes = [...boxContainer.children];
+
+  const temp = currentBoxes[firstIndex];
+  currentBoxes[firstIndex] = currentBoxes[secondIndex];
+  currentBoxes[secondIndex] = temp;
+
+  currentBoxes.forEach(box => {
+    boxContainer.appendChild(box);
+  });
+
+  firstAnimation.cancel();
+  secondAnimation.cancel();
+
+  [...boxContainer.querySelectorAll(".mystery-box")].forEach(
+    (box, visualIndex) => {
+      box.classList.remove("box-glow");
+      box.style.transform = "";
+
+      const label = box.querySelector("span");
+
+      if (label && !box.classList.contains("box-winner")) {
+        label.textContent =
+          "CAJA 0" + (visualIndex + 1);
+      }
+    }
+  );
+
+  return true;
+}
+
+function delay(ms) {
+  return new Promise(resolve => {
+    shuffleTimer = setTimeout(resolve, ms);
+  });
+}
+
+async function startBoxGame() {
+  if (isShuffling) return;
+
+  clearTimeout(shuffleTimer);
+
+  shuffleRunId++;
+  const thisRun = shuffleRunId;
+
+  boxFinished = false;
+  boxGameStarted = false;
+  isShuffling = true;
+
+  document.getElementById("box-success").hidden = true;
+
+  retryBoxButton.hidden = true;
+  startShuffleButton.hidden = false;
+  startShuffleButton.disabled = true;
+
+  resetBoxPositions();
+
+  /*
+    Elegimos una caja ganadora al azar.
+    Su identidad se conserva aunque cambie de lugar.
+  */
+
+  winningBox = Math.floor(Math.random() * 3);
+
+  const initialBoxes = [...boxContainer.querySelectorAll(".mystery-box")];
+  const winningButton = initialBoxes.find(
+    box => Number(box.dataset.box) === winningBox
+  );
+
+  winningButton.innerHTML = "⭐<span>¡AQUÍ ESTÁ!</span>";
+  winningButton.style.borderColor = "#ffe08a";
+  winningButton.style.boxShadow =
+    "0 0 30px #ffe08a70, inset 0 0 15px #ffe08a20";
+
+  starPreview.textContent = "⭐";
+
+  boxMessage.textContent =
+    "¡Memoriza bien la caja que contiene la estrella!";
+
+  boxResult.textContent = "";
+
+  /*
+    Dejamos unos segundos para memorizar la posición.
+  */
+
+  await delay(1800);
+
+  if (thisRun !== shuffleRunId) return;
+
+  starPreview.textContent = "👀";
+
+  boxMessage.textContent =
+    "¡Atención, agente Gaby! ¡Las cajas comienzan a moverse!";
+
+  initialBoxes.forEach(box => {
+    box.innerHTML = "🎁<span>¡SÍGUEME!</span>";
+    box.style.borderColor = "";
+    box.style.boxShadow = "";
+  });
+
+  /*
+    Doce intercambios animados.
+    Cada movimiento intercambia las posiciones físicas de dos cajas.
+  */
+
+  const totalSwaps = 12;
+
+  for (let i = 0; i < totalSwaps; i++) {
+    if (thisRun !== shuffleRunId) return;
+
+    const currentBoxes = [...boxContainer.querySelectorAll(".mystery-box")];
+
+    const firstIndex = Math.floor(Math.random() * currentBoxes.length);
+
+    let secondIndex = Math.floor(Math.random() * currentBoxes.length);
+
+    while (secondIndex === firstIndex) {
+      secondIndex = Math.floor(Math.random() * currentBoxes.length);
+    }
+
+    const swapped = await animateSwap(
+      firstIndex,
+      secondIndex,
+      thisRun
+    );
+
+    if (!swapped || thisRun !== shuffleRunId) return;
+
+    boxMessage.textContent =
+      "¡Sigue la estrella! Movimiento " + (i + 1) +
+      " de " + totalSwaps + " ✨";
+
+    await delay(140);
+  }
+
+  if (thisRun !== shuffleRunId) return;
+
+  isShuffling = false;
+  boxGameStarted = true;
+
+  boxMessage.textContent =
+    "¡Última oportunidad de concentración!";
+
+  starPreview.textContent = "🤔";
+
+  boxResult.textContent =
+    "Elige una caja y descubre si encontraste la estrella.";
+
+  boxContainer.querySelectorAll(".mystery-box").forEach(box => {
+    box.disabled = false;
+  });
+
+  startShuffleButton.disabled = false;
+  startShuffleButton.hidden = true;
+}
+
+function chooseBox(originalPosition) {
+  if (!boxGameStarted || boxFinished || isShuffling) return;
+
+  boxGameStarted = false;
+
+  const buttons = [...boxContainer.querySelectorAll(".mystery-box")];
+
+  buttons.forEach(button => {
+    button.disabled = true;
+  });
+
+  const selectedButton = buttons.find(
+    button => Number(button.dataset.box) === originalPosition
+  );
+
+  if (!selectedButton) return;
+
+  if (originalPosition === winningBox) {
     boxFinished = true;
 
-    buttons[index].textContent = "⭐";
-    buttons[index].querySelector("span").textContent = "¡GANASTE!";
+    selectedButton.innerHTML = "⭐<span>¡GANADORA!</span>";
+    selectedButton.classList.add("box-winner");
 
-    buttons[index].style.borderColor = "#ffd66b";
-    buttons[index].style.boxShadow = "0 0 30px #ffd66b55";
+    boxMessage.textContent =
+      "¡La estrella estaba aquí! ¡Misión completada!";
 
-    buttons.forEach(button => button.disabled = true);
-
-    result.innerHTML =
-      '<span style="color:#ffd66b">¡INCREÍBLE! Encontraste la estrella.</span>';
+    boxResult.innerHTML =
+      '<span style="color:#ffe08a">¡EXCELENTE, GABY! ⭐🏆</span>';
 
     document.getElementById("box-success").hidden = false;
-    document.getElementById("retry-box").hidden = true;
+
+    startShuffleButton.hidden = true;
+    retryBoxButton.hidden = true;
 
     playWinSound();
-    launchConfetti(100);
-    launchBalloons(8);
+    launchConfetti(120);
+    launchBalloons(10);
 
   } else {
-    buttons[index].textContent = "💨";
-    buttons[index].querySelector("span").textContent = "VACÍA";
+    selectedButton.innerHTML = "💨<span>CAJA VACÍA</span>";
+    selectedButton.classList.add("box-wrong");
 
-    buttons[index].disabled = true;
+    boxMessage.textContent =
+      "¡Uy! Esa caja no tenía la estrella.";
 
-    result.textContent =
-      "¡Esta caja estaba vacía! Prueba con otra.";
-    result.classList.remove("shake");
-    void result.offsetWidth;
-    result.classList.add("shake");
+    boxResult.textContent =
+      "¡No te rindas, agente Gaby! Puedes volver a intentarlo.";
 
-    document.getElementById("retry-box").hidden = false;
+    retryBoxButton.hidden = false;
+    startShuffleButton.hidden = true;
 
     playWrongSound();
   }
 }
 
-function resetBoxes() {
-  boxFinished = false;
-  winningBox = Math.floor(Math.random() * 3);
+function goToCodeScreen() {
+  if (!boxFinished) return;
 
-  const buttons = document.querySelectorAll(".mystery-box");
-
-  buttons.forEach((button, index) => {
-    button.disabled = false;
-    button.innerHTML = "🎁<span>CAJA 0" + (index + 1) + "</span>";
-    button.style.borderColor = "#ffffff30";
-    button.style.boxShadow = "";
-  });
-
-  document.getElementById("box-result").textContent =
-    "Elige una caja para descubrir lo que esconde.";
-
-  document.getElementById("retry-box").hidden = true;
+  showScreen("code-screen", 2);
 }
 
 /* ==========================================
@@ -1082,7 +1575,8 @@ document.getElementById("code-form").addEventListener("submit", event => {
 
   if (input.value.trim().toUpperCase() === SECRET_CODE) {
     feedback.style.color = "#70ffb0";
-    feedback.textContent = "¡CÓDIGO CORRECTO! Acceso autorizado.";
+    feedback.textContent =
+      "¡CÓDIGO CORRECTO! ACCESO AUTORIZADO.";
 
     playWinSound();
     launchConfetti(45);
@@ -1093,13 +1587,15 @@ document.getElementById("code-form").addEventListener("submit", event => {
 
   } else {
     feedback.style.color = "#ff6489";
-    feedback.textContent = "Código incorrecto. ¡Inténtalo de nuevo!";
+    feedback.textContent =
+      "CÓDIGO INCORRECTO. ¡INTÉNTALO DE NUEVO!";
 
     input.classList.remove("shake");
     void input.offsetWidth;
     input.classList.add("shake");
 
     playWrongSound();
+
     input.value = "";
     input.focus();
   }
@@ -1121,22 +1617,23 @@ function answerQuestion(index) {
     quizLocked = true;
 
     feedback.style.color = "#70ffb0";
-    feedback.textContent = "¡CORRECTO! ¡PREPÁRATE PARA LA SORPRESA!";
+    feedback.textContent =
+      "¡CORRECTO! ¡PREPÁRATE PARA LA SORPRESA!";
 
-    buttons.forEach(button => button.disabled = true);
+    buttons.forEach(button => {
+      button.disabled = true;
+    });
 
     playWinSound();
     launchConfetti(100);
     launchBalloons(8);
 
-    setTimeout(() => {
-      startCountdown();
-    }, 1800);
+    setTimeout(startCountdown, 1800);
 
   } else {
     feedback.style.color = "#ff9bb6";
     feedback.textContent =
-      "Mmm... esa no es la respuesta. ¡Inténtalo otra vez! ❤️";
+      "¡Esa no es! Piensa en tu grupo favorito. ❤️";
 
     playWrongSound();
   }
@@ -1161,6 +1658,7 @@ function startCountdown() {
       number.textContent = count;
     } else {
       clearInterval(timer);
+
       number.textContent = "🎉";
 
       playWinSound();
@@ -1169,7 +1667,6 @@ function startCountdown() {
 
       setTimeout(() => {
         showScreen("reveal-screen", 5);
-
         launchConfetti(180);
         launchBalloons(15);
       }, 900);
@@ -1178,7 +1675,7 @@ function startCountdown() {
 }
 
 /* ==========================================
-   CONFETI
+   CONFETI ANIMADO
    ========================================== */
 
 const canvas = document.getElementById("confetti");
@@ -1188,12 +1685,12 @@ let confettiPieces = [];
 let confettiRunning = false;
 
 function resizeCanvas() {
-  canvas.width = window.innerWidth * devicePixelRatio;
-  canvas.height = window.innerHeight * devicePixelRatio;
+  const dpr = window.devicePixelRatio || 1;
 
-  ctx.setTransform(
-    devicePixelRatio, 0, 0, devicePixelRatio, 0, 0
-  );
+  canvas.width = window.innerWidth * dpr;
+  canvas.height = window.innerHeight * dpr;
+
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 
 window.addEventListener("resize", resizeCanvas);
@@ -1201,10 +1698,10 @@ resizeCanvas();
 
 function launchConfetti(amount = 100) {
   const colors = [
-    "#ff2d75",
-    "#9d4dff",
-    "#35d9ff",
-    "#ffd66b",
+    "#ff287f",
+    "#a34dff",
+    "#43dcff",
+    "#ffe08a",
     "#ffffff",
     "#70ffb0"
   ];
@@ -1212,7 +1709,7 @@ function launchConfetti(amount = 100) {
   for (let i = 0; i < amount; i++) {
     confettiPieces.push({
       x: Math.random() * window.innerWidth,
-      y: -20 - Math.random() * window.innerHeight * 0.4,
+      y: -20 - Math.random() * window.innerHeight * .4,
       w: 4 + Math.random() * 7,
       h: 5 + Math.random() * 8,
       color: colors[Math.floor(Math.random() * colors.length)],
@@ -1247,7 +1744,14 @@ function animateConfetti() {
     ctx.translate(piece.x, piece.y);
     ctx.rotate(piece.angle);
     ctx.fillStyle = piece.color;
-    ctx.fillRect(-piece.w / 2, -piece.h / 2, piece.w, piece.h);
+
+    ctx.fillRect(
+      -piece.w / 2,
+      -piece.h / 2,
+      piece.w,
+      piece.h
+    );
+
     ctx.restore();
   });
 
@@ -1264,7 +1768,7 @@ function animateConfetti() {
    ========================================== */
 
 function launchBalloons(amount = 8) {
-  const balloons = ["🎈", "💜", "💖", "🎈", "✨"];
+  const emojis = ["🎈", "💜", "💖", "✨", "🎈"];
 
   for (let i = 0; i < amount; i++) {
     setTimeout(() => {
@@ -1272,10 +1776,11 @@ function launchBalloons(amount = 8) {
 
       balloon.className = "balloon";
       balloon.textContent =
-        balloons[Math.floor(Math.random() * balloons.length)];
+        emojis[Math.floor(Math.random() * emojis.length)];
 
       balloon.style.left = Math.random() * 90 + "%";
-      balloon.style.animationDuration = (4 + Math.random() * 3) + "s";
+      balloon.style.animationDuration =
+        (4 + Math.random() * 3) + "s";
 
       document.body.appendChild(balloon);
 
@@ -1283,6 +1788,10 @@ function launchBalloons(amount = 8) {
     }, i * 180);
   }
 }
+
+/* ==========================================
+   CELEBRACIÓN FINAL
+   ========================================== */
 
 function celebrateAgain() {
   playWinSound();
@@ -1292,4 +1801,4 @@ function celebrateAgain() {
 </script>
 
 </body>
-</html>
+  </html>
